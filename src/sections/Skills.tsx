@@ -150,3 +150,4 @@ export const Skills: React.FC = () => {
     </SectionContainer>
   );
 };
+

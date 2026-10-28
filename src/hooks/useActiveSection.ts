@@ -39,3 +39,4 @@ export function useActiveSection(sectionIds: string[], offset: number = 100): st
 
   return activeSection;
 }
+

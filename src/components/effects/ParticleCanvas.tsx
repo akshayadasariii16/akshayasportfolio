@@ -168,3 +168,4 @@ export const ParticleCanvas: React.FC<{ className?: string }> = ({ className = '
     />
   );
 };
+

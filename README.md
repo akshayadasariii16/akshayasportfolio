@@ -101,3 +101,4 @@ All personal content and telemetry are separated from presentation code:
 - **Projects**: [`src/data/projects.ts`](file:///c:/Users/khani/OneDrive/Desktop/portfolio%20buddi/src/data/projects.ts)
 - **Skills Matrix**: [`src/data/skills.ts`](file:///c:/Users/khani/OneDrive/Desktop/portfolio%20buddi/src/data/skills.ts)
 - **Profile Portrait**: Drop [`profile.jpg`](file:///c:/Users/khani/OneDrive/Desktop/portfolio%20buddi/public/README.md) into the `public/` directory.
+

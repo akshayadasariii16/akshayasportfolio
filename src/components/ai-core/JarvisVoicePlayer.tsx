@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Volume2, VolumeX, Play, Square, Radio, ChevronDown, ChevronUp } from 'lucide-react';
+import { Volume2, VolumeX, Square, Radio, ChevronDown, ChevronUp } from 'lucide-react';
 import { useSpeechNarration } from '../../hooks/useSpeechNarration';
 import { portfolioData } from '../../data/portfolio';
 
-export const JarvisVoicePlayer: React.FC = () => {
+interface JarvisVoicePlayerProps {
+  autoStart?: boolean;
+}
+
+export const JarvisVoicePlayer: React.FC<JarvisVoicePlayerProps> = ({ autoStart = true }) => {
   const { voiceNarration } = portfolioData;
   const [showTranscript, setShowTranscript] = useState(false);
 
@@ -12,14 +16,14 @@ export const JarvisVoicePlayer: React.FC = () => {
     isMuted,
     isSupported,
     currentVoiceName,
-    play,
     stop,
     toggleMute
   } = useSpeechNarration({
     text: voiceNarration.introScript,
     lang: voiceNarration.preferredVoiceLang,
     rate: voiceNarration.rate,
-    pitch: voiceNarration.pitch
+    pitch: voiceNarration.pitch,
+    autoPlay: autoStart
   });
 
   if (!isSupported) {
@@ -29,7 +33,7 @@ export const JarvisVoicePlayer: React.FC = () => {
   return (
     <aside
       className="jarvis-voice-hud"
-      aria-label="JARVIS Voice Narration Controller"
+      aria-label="JARVIS Autonomous Voice Narration HUD"
       style={{
         position: 'fixed',
         bottom: '24px',
@@ -41,14 +45,14 @@ export const JarvisVoicePlayer: React.FC = () => {
       <div
         className="glass-panel"
         style={{
-          padding: '0.75rem 1.1rem',
+          padding: '0.75rem 1.15rem',
           borderRadius: 'var(--radius-pill)',
           display: 'flex',
           alignItems: 'center',
           gap: '12px',
           boxShadow: 'var(--shadow-glass), var(--shadow-glow-pink)',
           border: '1px solid rgba(217, 130, 163, 0.35)',
-          background: 'rgba(255, 248, 250, 0.92)'
+          background: 'rgba(255, 248, 250, 0.94)'
         }}
       >
         {/* Audio Equalizer (4 bars) */}
@@ -60,7 +64,7 @@ export const JarvisVoicePlayer: React.FC = () => {
             height: '18px',
             padding: '0 2px'
           }}
-          title={isSpeaking ? 'JARVIS is speaking...' : 'Equalizer idle'}
+          title={isSpeaking ? 'JARVIS is speaking...' : 'Audio idle'}
           aria-hidden="true"
         >
           <span className={`equalizer-bar ${isSpeaking ? 'active' : ''}`} />
@@ -69,8 +73,8 @@ export const JarvisVoicePlayer: React.FC = () => {
           <span className={`equalizer-bar ${isSpeaking ? 'active' : ''}`} />
         </div>
 
-        {/* Telemetry Status and Voice Name */}
-        <div style={{ display: 'flex', flexDirection: 'column', minWidth: '100px' }}>
+        {/* Telemetry Status and Voice Info */}
+        <div style={{ display: 'flex', flexDirection: 'column', minWidth: '105px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
             <Radio size={12} color={isSpeaking ? '#D982A3' : '#795A6B'} />
             <span
@@ -82,7 +86,7 @@ export const JarvisVoicePlayer: React.FC = () => {
                 color: isSpeaking ? 'var(--color-strong-pink)' : 'var(--color-rosewood)'
               }}
             >
-              JARVIS {isSpeaking ? 'ACTIVE' : 'READY'}
+              JARVIS {isSpeaking ? 'SPEAKING' : 'ONLINE'}
             </span>
           </div>
           <span
@@ -95,15 +99,15 @@ export const JarvisVoicePlayer: React.FC = () => {
               textOverflow: 'ellipsis',
               maxWidth: '120px'
             }}
-            title={currentVoiceName || 'Default System Voice'}
+            title={currentVoiceName || 'Autonomous Speech Synthesizer'}
           >
-            {currentVoiceName ? currentVoiceName.split(' ')[0] : 'Voice Engine'}
+            {currentVoiceName ? currentVoiceName.split(' ')[0] : 'Autonomous Voice'}
           </span>
         </div>
 
-        {/* Action Controls */}
+        {/* Action Controls: No manual Play button as requested */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          {isSpeaking ? (
+          {isSpeaking && (
             <button
               onClick={stop}
               style={{
@@ -111,7 +115,7 @@ export const JarvisVoicePlayer: React.FC = () => {
                 height: '32px',
                 borderRadius: '50%',
                 border: '1px solid var(--color-dusty-blush)',
-                background: 'rgba(248, 215, 227, 0.4)',
+                background: 'rgba(248, 215, 227, 0.45)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -119,32 +123,10 @@ export const JarvisVoicePlayer: React.FC = () => {
                 cursor: 'pointer',
                 transition: 'all 0.2s ease'
               }}
-              title="Stop Narration"
+              title="Stop Speech Narration"
               aria-label="Stop JARVIS Voice Narration"
             >
               <Square size={13} fill="currentColor" />
-            </button>
-          ) : (
-            <button
-              onClick={play}
-              style={{
-                width: '32px',
-                height: '32px',
-                borderRadius: '50%',
-                border: '1px solid var(--color-strong-pink)',
-                background: 'linear-gradient(135deg, #F8D7E3, #D982A3)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                color: '#FFF8FA',
-                cursor: 'pointer',
-                boxShadow: '0 2px 8px rgba(217, 130, 163, 0.4)',
-                transition: 'all 0.2s ease'
-              }}
-              title="Play AI Introduction"
-              aria-label="Play JARVIS AI Voice Introduction"
-            >
-              <Play size={14} fill="currentColor" style={{ marginLeft: '2px' }} />
             </button>
           )}
 
@@ -160,9 +142,10 @@ export const JarvisVoicePlayer: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               color: isMuted ? 'var(--color-error)' : 'var(--color-rosewood)',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
             }}
-            title={isMuted ? 'Unmute' : 'Mute'}
+            title={isMuted ? 'Unmute Audio' : 'Mute Audio'}
             aria-label={isMuted ? 'Unmute voice synthesis' : 'Mute voice synthesis'}
           >
             {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
@@ -181,7 +164,8 @@ export const JarvisVoicePlayer: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               color: 'var(--color-muted-text)',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              transition: 'color 0.2s ease'
             }}
             title={showTranscript ? 'Hide transcript' : 'Show transcript'}
             aria-expanded={showTranscript}
@@ -198,14 +182,14 @@ export const JarvisVoicePlayer: React.FC = () => {
           className="glass-panel"
           style={{
             marginTop: '8px',
-            padding: '1rem',
+            padding: '1.1rem',
             borderRadius: 'var(--radius-md)',
-            background: 'rgba(255, 248, 250, 0.95)',
+            background: 'rgba(255, 248, 250, 0.96)',
             boxShadow: 'var(--shadow-glass)',
             border: '1px solid var(--glass-border)',
-            fontSize: '0.8rem',
+            fontSize: '0.8125rem',
             color: 'var(--color-rosewood)',
-            lineHeight: 1.5
+            lineHeight: 1.55
           }}
         >
           <div
@@ -213,14 +197,14 @@ export const JarvisVoicePlayer: React.FC = () => {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              marginBottom: '0.4rem',
+              marginBottom: '0.45rem',
               fontFamily: 'var(--font-mono)',
               fontSize: '0.68rem',
               color: 'var(--color-strong-pink)'
             }}
           >
-            <span>TRANSMISSION TRANSCRIPT</span>
-            <span style={{ color: 'var(--color-muted-text)' }}>AUDIO // OPTIONAL</span>
+            <span>AUTONOMOUS TRANSMISSION</span>
+            <span style={{ color: 'var(--color-muted-text)' }}>AUDIO // ACTIVE</span>
           </div>
           <p>"{voiceNarration.introScript}"</p>
         </div>

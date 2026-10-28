@@ -94,3 +94,4 @@ export const SkillBar: React.FC<SkillBarProps> = ({ skill, index }) => {
     </div>
   );
 };
+

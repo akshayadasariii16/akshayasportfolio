@@ -82,3 +82,4 @@ export const projectsData: Project[] = [
     liveUrl: '#hero'
   }
 ];
+
