@@ -1,0 +1,158 @@
+/* Container & Layout Utilities */
+.container-custom {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 4vw, 2.5rem);
+  padding-right: clamp(1rem, 4vw, 2.5rem);
+}
+
+.section-wrapper {
+  position: relative;
+  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+/* Gradient Typography (Spec 3.1 & 7) */
+.gradient-text-pink {
+  background: linear-gradient(135deg, var(--color-strong-pink) 0%, var(--color-rosewood) 85%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-holo {
+  background: linear-gradient(135deg, var(--color-strong-pink) 0%, var(--color-lavender-glow) 55%, var(--color-rosewood) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Status Indicator Pill */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(255, 248, 250, 0.90);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-rosewood);
+  box-shadow: 0 2px 8px rgba(183, 110, 139, 0.08);
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--color-strong-pink);
+  box-shadow: 0 0 10px var(--color-strong-pink);
+  position: relative;
+}
+
+.status-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid var(--color-strong-pink);
+  animation: pulse-ring 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  50% { transform: scale(1.6); opacity: 0.2; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, var(--color-baby-pink) 0%, #fad4e2 50%, var(--color-dusty-blush) 100%);
+  color: var(--color-rosewood);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  border: 1px solid rgba(217, 130, 163, 0.4);
+  box-shadow: 0 4px 16px rgba(233, 168, 188, 0.35);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-normal);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(217, 130, 163, 0.45), 0 0 20px rgba(167, 139, 250, 0.3);
+  border-color: var(--color-strong-pink);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--glass-blur));
+  color: var(--color-rosewood);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-subtle);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-normal);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--color-dusty-blush);
+  box-shadow: 0 6px 20px rgba(183, 110, 139, 0.18);
+}
+
+/* Equalizer Bars Animation for Jarvis HUD */
+.equalizer-bar {
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(to top, var(--color-strong-pink), var(--color-lavender-glow));
+  transform-origin: bottom;
+  height: 16px;
+  transition: height 0.15s ease;
+}
+
+.equalizer-bar.active:nth-child(1) {
+  animation: eq-bounce-1 0.7s ease-in-out infinite alternate;
+}
+.equalizer-bar.active:nth-child(2) {
+  animation: eq-bounce-2 0.6s ease-in-out infinite alternate 0.15s;
+}
+.equalizer-bar.active:nth-child(3) {
+  animation: eq-bounce-3 0.8s ease-in-out infinite alternate 0.1s;
+}
+.equalizer-bar.active:nth-child(4) {
+  animation: eq-bounce-4 0.65s ease-in-out infinite alternate 0.25s;
+}
+
+@keyframes eq-bounce-1 {
+  0% { transform: scaleY(0.25); }
+  100% { transform: scaleY(1.0); }
+}
+@keyframes eq-bounce-2 {
+  0% { transform: scaleY(0.4); }
+  100% { transform: scaleY(0.85); }
+}
+@keyframes eq-bounce-3 {
+  0% { transform: scaleY(0.2); }
+  100% { transform: scaleY(0.95); }
+}
+@keyframes eq-bounce-4 {
+  0% { transform: scaleY(0.35); }
+  100% { transform: scaleY(0.75); }
+}

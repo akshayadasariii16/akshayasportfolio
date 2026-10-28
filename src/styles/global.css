@@ -1,0 +1,137 @@
+@import './tokens.css';
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--color-pearl-white);
+  color: var(--color-rosewood);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-color: var(--color-pearl-white);
+  /* Atmospheric multi-layer background mesh & subtle grid (Spec 3.4) */
+  background-image: 
+    radial-gradient(circle at 18% 12%, rgba(248, 215, 227, 0.45) 0%, transparent 48%),
+    radial-gradient(circle at 82% 28%, rgba(196, 181, 253, 0.28) 0%, transparent 42%),
+    radial-gradient(circle at 35% 65%, rgba(252, 238, 243, 0.60) 0%, transparent 55%),
+    radial-gradient(circle at 75% 88%, rgba(248, 215, 227, 0.40) 0%, transparent 45%),
+    linear-gradient(to right, rgba(183, 110, 139, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(183, 110, 139, 0.04) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+  background-attachment: fixed;
+  line-height: 1.6;
+}
+
+/* Custom Selection */
+::selection {
+  background-color: var(--color-baby-pink);
+  color: var(--color-rosewood);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-pearl-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dusty-blush);
+  border-radius: var(--radius-pill);
+  border: 2px solid var(--color-pearl-white);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-strong-pink);
+}
+
+/* Accessible Focus Indicators */
+:focus-visible {
+  outline: 2px solid var(--color-strong-pink);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+/* Navigable Section Offset for Fixed Header (Spec 12) */
+section[id] {
+  scroll-margin-top: calc(var(--nav-height) + 24px);
+}
+
+/* Monospace Telemetry Elements */
+.font-mono,
+[data-telemetry] {
+  font-family: var(--font-mono);
+  letter-spacing: -0.02em;
+}
+
+/* Glassmorphic Surfaces (Spec 3.2) */
+.glass-panel {
+  background: var(--glass-surface);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition-normal), box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+
+.glass-panel:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--shadow-glow-pink), var(--shadow-glass);
+}
+
+/* Holographic Glowing Border utility */
+.holo-glow-border {
+  position: relative;
+}
+
+.holo-glow-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(217, 130, 163, 0.4), rgba(167, 139, 250, 0.3), rgba(248, 215, 227, 0.2));
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.6;
+  transition: opacity var(--transition-normal);
+}
+
+.holo-glow-border:hover::after {
+  opacity: 1;
+}
+
+/* Reduced Motion Mode (Spec 3.5 & 16) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}
