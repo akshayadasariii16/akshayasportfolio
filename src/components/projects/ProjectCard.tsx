@@ -30,7 +30,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '1.75rem',
+        padding: 'clamp(1.15rem, 3.5vw, 1.75rem)',
         position: 'relative',
         transition: 'all var(--transition-normal)'
       }}

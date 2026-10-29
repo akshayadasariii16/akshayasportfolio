@@ -157,3 +157,88 @@
   100% { transform: scaleY(0.75); }
 }
 
+/* ========================================================
+   Mobile-Specific Optimizations (Spec 15 Responsive Design)
+   ======================================================== */
+@media (max-width: 768px) {
+  .container-custom {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .section-wrapper {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+
+  /* Full-width responsive buttons on mobile */
+  .hero-cta-group {
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-secondary {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0.95rem 1.5rem !important;
+  }
+
+  /* Form controls touch sizing & iOS zoom prevention (font-size >= 16px) */
+  input, textarea, select {
+    font-size: 16px !important;
+    min-height: 48px;
+  }
+
+  textarea {
+    min-height: 110px;
+  }
+
+  /* Docked HUD on mobile */
+  .jarvis-voice-hud {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 12px !important;
+    max-width: none !important;
+    width: auto !important;
+  }
+
+  .jarvis-voice-hud > .glass-panel {
+    padding: 0.65rem 0.95rem !important;
+    gap: 8px !important;
+    justify-content: space-between !important;
+  }
+
+  /* Hide custom cursor completely on mobile */
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+
+  /* Responsive cards and grids on mobile */
+  .mobile-grid-single {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ultra-compact header and status on narrow screens */
+  .status-pill {
+    font-size: 0.65rem !important;
+    padding: 0.25rem 0.65rem !important;
+  }
+
+  /* Touch-friendly category tabs with horizontal scrolling support */
+  .filter-tabs-wrapper {
+    justify-content: flex-start !important;
+    overflow-x: auto !important;
+    padding-bottom: 0.5rem !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .filter-tabs-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+}
+

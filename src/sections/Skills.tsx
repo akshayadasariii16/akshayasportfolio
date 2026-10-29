@@ -22,12 +22,13 @@ export const Skills: React.FC = () => {
       <div
         role="tablist"
         aria-label="Skill Categories"
+        className="filter-tabs-wrapper"
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           gap: '0.65rem',
           justifyContent: 'center',
-          marginBottom: '2.5rem'
+          marginBottom: '2rem'
         }}
       >
         {skillsCategories.map((category) => {
@@ -112,7 +113,7 @@ export const Skills: React.FC = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
               gap: '1.25rem'
             }}
           >

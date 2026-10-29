@@ -13,7 +13,21 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
   const [telemetryStage, setTelemetryStage] = useState('SYS_INITIALIZING // CORE KERNEL 0x7E1');
   const [isReadyToEnter, setIsReadyToEnter] = useState(false);
   const [countdown, setCountdown] = useState(4);
+  const [coreSize, setCoreSize] = useState(220);
   const reducedMotion = useReducedMotion();
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 400 || window.innerHeight < 700) {
+        setCoreSize(180);
+      } else {
+        setCoreSize(230);
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Progress sequence
   useEffect(() => {
@@ -117,18 +131,18 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         onClick={onComplete}
         style={{
           position: 'absolute',
-          top: '24px',
-          right: '24px',
+          top: 'clamp(12px, 3vw, 24px)',
+          right: 'clamp(12px, 3vw, 24px)',
           display: 'inline-flex',
           alignItems: 'center',
           gap: '8px',
-          padding: '8px 18px',
+          padding: '6px 14px',
           background: 'rgba(255, 248, 250, 0.90)',
           backdropFilter: 'blur(12px)',
           border: '1px solid var(--color-dusty-blush)',
           borderRadius: 'var(--radius-pill)',
           fontFamily: 'var(--font-mono)',
-          fontSize: '0.78rem',
+          fontSize: '0.72rem',
           fontWeight: 600,
           color: 'var(--color-rosewood)',
           cursor: 'pointer',
@@ -138,13 +152,13 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
         }}
         aria-label="Skip Activation Sequence"
       >
-        <FastForward size={14} color="#D982A3" />
-        <span>SKIP SEQUENCE</span>
+        <FastForward size={13} color="#D982A3" />
+        <span>SKIP</span>
       </button>
 
       {/* Holographic AI Core in center with scanning laser animation */}
-      <div style={{ position: 'relative', marginBottom: '2rem' }}>
-        <AICoreCSS size={240} isInteractive={false} />
+      <div style={{ position: 'relative', marginBottom: 'clamp(1rem, 3vh, 2rem)' }}>
+        <AICoreCSS size={coreSize} isInteractive={false} />
         {/* Subtle horizontal scanning line */}
         <div
           style={{
@@ -290,17 +304,18 @@ export const LoadingScreen: React.FC<LoadingScreenProps> = ({ onComplete }) => {
                 onClick={onComplete}
                 className="btn-primary"
                 style={{
-                  padding: '0.95rem 2.2rem',
-                  fontSize: '0.9375rem',
-                  gap: '10px',
+                  padding: 'clamp(0.75rem, 2.5vw, 0.95rem) clamp(1rem, 4vw, 2.2rem)',
+                  fontSize: 'clamp(0.78rem, 2.8vw, 0.9375rem)',
+                  gap: '8px',
+                  width: 'min(100%, 460px)',
                   boxShadow: '0 6px 25px rgba(217, 130, 163, 0.5), 0 0 25px rgba(167, 139, 250, 0.4)',
                   cursor: 'pointer'
                 }}
                 aria-label="Enter Terminal and Start Experience"
               >
-                <Volume2 size={18} />
+                <Volume2 size={16} style={{ flexShrink: 0 }} />
                 <span>ENTER TERMINAL // INITIALIZE JARVIS</span>
-                <ArrowRight size={18} />
+                <ArrowRight size={16} style={{ flexShrink: 0 }} />
               </button>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--color-muted-text)' }}>
                 JARVIS narration will begin automatically · Auto-entering in {countdown}s

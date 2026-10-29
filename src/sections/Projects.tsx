@@ -22,12 +22,13 @@ export const Projects: React.FC = () => {
     >
       {/* Category Filter Pills */}
       <div
+        className="filter-tabs-wrapper"
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           gap: '0.65rem',
           justifyContent: 'center',
-          marginBottom: '3rem'
+          marginBottom: '2.5rem'
         }}
       >
         {categories.map((cat) => {
@@ -63,8 +64,8 @@ export const Projects: React.FC = () => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2rem'
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
+          gap: 'clamp(1.25rem, 3vw, 2rem)'
         }}
       >
         {filteredProjects.map((project) => (

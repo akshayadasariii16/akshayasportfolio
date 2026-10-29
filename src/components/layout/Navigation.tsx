@@ -268,7 +268,7 @@ export const Navigation: React.FC = () => {
         >
           <div
             style={{
-              width: '82%',
+              width: '85%',
               maxWidth: '320px',
               height: '100%',
               background: 'rgba(255, 248, 250, 0.98)',
@@ -277,7 +277,8 @@ export const Navigation: React.FC = () => {
               flexDirection: 'column',
               justifyContent: 'space-between',
               boxShadow: '-8px 0 32px rgba(81, 55, 71, 0.15)',
-              borderLeft: '1px solid var(--color-dusty-blush)'
+              borderLeft: '1px solid var(--color-dusty-blush)',
+              overflowY: 'auto'
             }}
             onClick={(e) => e.stopPropagation()}
           >

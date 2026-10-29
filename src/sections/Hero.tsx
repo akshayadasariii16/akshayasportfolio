@@ -8,6 +8,7 @@ import { portfolioData } from '../data/portfolio';
 export const Hero: React.FC = () => {
   const { identity } = portfolioData;
   const [roleIndex, setRoleIndex] = useState(0);
+  const [coreSize, setCoreSize] = useState(320);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -15,6 +16,25 @@ export const Hero: React.FC = () => {
     }, 3200);
     return () => clearInterval(timer);
   }, [identity.roles.length]);
+
+  useEffect(() => {
+    const updateSize = () => {
+      const width = window.innerWidth;
+      if (width < 380) {
+        setCoreSize(210);
+      } else if (width < 640) {
+        setCoreSize(250);
+      } else if (width < 1024) {
+        setCoreSize(290);
+      } else {
+        setCoreSize(340);
+      }
+    };
+
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   return (
     <section
@@ -24,8 +44,8 @@ export const Hero: React.FC = () => {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        paddingTop: 'calc(var(--nav-height) + 2rem)',
-        paddingBottom: '4rem',
+        paddingTop: 'calc(var(--nav-height) + 1.5rem)',
+        paddingBottom: 'clamp(3rem, 6vw, 5rem)',
         overflow: 'hidden'
       }}
       aria-label="Akshaya — Hero Scene"
@@ -37,9 +57,9 @@ export const Hero: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))',
             alignItems: 'center',
-            gap: '3rem'
+            gap: 'clamp(2rem, 5vw, 3.5rem)'
           }}
         >
           {/* Left Hero Narrative Column */}
@@ -62,12 +82,15 @@ export const Hero: React.FC = () => {
                 fontSize: 'var(--text-xs)',
                 color: 'var(--color-strong-pink)',
                 letterSpacing: '0.12em',
-                marginBottom: '1.5rem',
-                boxShadow: 'var(--shadow-subtle)'
+                marginBottom: '1.25rem',
+                boxShadow: 'var(--shadow-subtle)',
+                maxWidth: '100%'
               }}
             >
-              <Terminal size={13} />
-              <span>{identity.systemGreeting}</span>
+              <Terminal size={13} style={{ flexShrink: 0 }} />
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                {identity.systemGreeting}
+              </span>
             </div>
 
             {/* Oversized Expressive Headline */}
@@ -77,7 +100,7 @@ export const Hero: React.FC = () => {
                 fontWeight: 800,
                 lineHeight: 1.05,
                 letterSpacing: '-0.03em',
-                marginBottom: '1rem',
+                marginBottom: '0.75rem',
                 color: 'var(--color-rosewood)'
               }}
             >
@@ -90,7 +113,7 @@ export const Hero: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '10px',
-                fontSize: 'var(--text-xl)',
+                fontSize: 'clamp(1.1rem, 3.5vw, 1.5rem)',
                 fontWeight: 600,
                 color: 'var(--color-rosewood)',
                 marginBottom: '1.25rem',
@@ -117,14 +140,17 @@ export const Hero: React.FC = () => {
                 color: 'var(--color-muted-text)',
                 lineHeight: 1.7,
                 maxWidth: '540px',
-                marginBottom: '2.5rem'
+                marginBottom: '2rem'
               }}
             >
               I am Akshaya, a Software Developer passionate about building robust web applications, intelligent AI systems, and responsive digital experiences.
             </p>
 
             {/* Prominent Dual Calls to Action */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', alignItems: 'center' }}>
+            <div
+              className="hero-cta-group"
+              style={{ display: 'flex', flexWrap: 'wrap', gap: '0.85rem', alignItems: 'center' }}
+            >
               <a href="#projects" className="btn-primary">
                 <Sparkles size={16} />
                 <span>EXPLORE UNIVERSE</span>
@@ -141,10 +167,11 @@ export const Hero: React.FC = () => {
             <div
               style={{
                 display: 'flex',
+                flexWrap: 'wrap',
                 alignItems: 'center',
-                gap: '1.5rem',
-                marginTop: '2.5rem',
-                paddingTop: '1.5rem',
+                gap: '0.75rem 1.5rem',
+                marginTop: '2rem',
+                paddingTop: '1.25rem',
                 borderTop: '1px solid var(--color-border)',
                 fontFamily: 'var(--font-mono)',
                 fontSize: 'var(--text-xs)',
@@ -170,35 +197,38 @@ export const Hero: React.FC = () => {
               flexDirection: 'column',
               alignItems: 'center',
               justifyContent: 'center',
-              position: 'relative'
+              position: 'relative',
+              width: '100%'
             }}
           >
             <div
               className="glass-panel"
               style={{
-                padding: '2rem',
+                padding: 'clamp(1rem, 4vw, 2rem)',
                 borderRadius: 'var(--radius-xl)',
                 background: 'rgba(255, 248, 250, 0.65)',
                 boxShadow: 'var(--shadow-glass), var(--shadow-glow-pink)',
                 border: '1px solid rgba(217, 130, 163, 0.25)',
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center'
+                alignItems: 'center',
+                maxWidth: '100%'
               }}
             >
-              <AICore size={340} />
+              <AICore size={coreSize} />
               <div
                 style={{
-                  marginTop: '1rem',
+                  marginTop: '0.75rem',
                   fontFamily: 'var(--font-mono)',
-                  fontSize: '0.72rem',
+                  fontSize: '0.68rem',
                   color: 'var(--color-muted-text)',
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '8px'
+                  gap: '8px',
+                  textAlign: 'center'
                 }}
               >
-                <span className="status-dot" style={{ width: '6px', height: '6px' }} />
+                <span className="status-dot" style={{ width: '6px', height: '6px', flexShrink: 0 }} />
                 <span>JARVIS HOLOGRAPHIC CORE // REAL-TIME 3D</span>
               </div>
             </div>
@@ -210,7 +240,7 @@ export const Hero: React.FC = () => {
           style={{
             display: 'flex',
             justifyContent: 'center',
-            marginTop: '3.5rem'
+            marginTop: 'clamp(2rem, 4vw, 3.5rem)'
           }}
         >
           <a
@@ -241,4 +271,3 @@ export const Hero: React.FC = () => {
     </section>
   );
 };
-
