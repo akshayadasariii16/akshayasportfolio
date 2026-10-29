@@ -48,7 +48,7 @@
    - Verified telemetry metric cards.
 
 5. **Scene 5 — Project Universe (`Projects.tsx` & `ProjectCard.tsx`)**:
-   - Filterable project grid featuring JARVIS, NovaMart, Wi-Fi Attendance, and HoloPulse.
+   - Filterable project grid featuring Plant Detector AI, JARVIS, NovaMart, and Wi-Fi Attendance.
    - Interactive drawer expanding "The Problem", "The Solution", and key architectural highlights.
    - Verified repository and deployment links.
 

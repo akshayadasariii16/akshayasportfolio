@@ -120,7 +120,7 @@ export const Hero: React.FC = () => {
                 marginBottom: '2.5rem'
               }}
             >
-              Architecting next-generation web applications, autonomous intelligence pipelines, and responsive 3D interfaces designed with surgical precision and ethereal blush-pink elegance.
+              I am Akshaya, a Software Developer passionate about building robust web applications, intelligent AI systems, and responsive digital experiences.
             </p>
 
             {/* Prominent Dual Calls to Action */}
@@ -152,7 +152,7 @@ export const Hero: React.FC = () => {
               }}
             >
               <div>
-                <span style={{ color: 'var(--color-strong-pink)' }}>LOCATION:</span> BANGALORE // REMOTE
+                <span style={{ color: 'var(--color-strong-pink)' }}>LOCATION:</span> HYDERABAD // REMOTE
               </div>
               <div>
                 <span style={{ color: 'var(--color-strong-pink)' }}>STATUS:</span> AVAILABLE

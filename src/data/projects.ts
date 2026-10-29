@@ -2,6 +2,26 @@ import { Project } from '../types/portfolio';
 
 export const projectsData: Project[] = [
   {
+    id: 'plant-detector-ai',
+    title: 'Plant Detector // Botanical AI',
+    tagline: 'Computer Vision & Large-Scale Plant Recognition System',
+    summary: 'An intelligent AI application powered by computer vision and a vast botanical database that accurately recognizes and classifies plant species in real-time when shown to the camera.',
+    status: 'Completed',
+    category: 'AI & Machine Learning',
+    telemetryId: 'BOTANICAL_AI_04',
+    techStack: ['Python', 'Computer Vision', 'PyTorch / TensorFlow', 'FastAPI', 'React', 'TypeScript'],
+    problem: 'Identifying diverse flora species, assessing plant health, and categorizing botanical taxonomy manually requires deep domain expertise, making flora exploration challenging for students, agriculturists, and plant enthusiasts.',
+    solution: 'Constructed an end-to-end computer vision recognition pipeline trained on an extensive botanical database of thousands of plant classes. The system instantly classifies leaf patterns, flowers, and foliage captured via camera feed, returning detailed species taxonomy, care guides, and growth metrics.',
+    highlights: [
+      'High-precision real-time plant species detection and botanical classification',
+      'Extensive multi-species database featuring botanical taxonomy, watering requirements, and ideal climates',
+      'Live camera scanner feed with instant visual bounding-box identification and confidence scoring',
+      'Robust offline-first classification cache designed for field exploration and remote botanical research'
+    ],
+    githubUrl: 'https://github.com/akshaya/plant-detector-ai',
+    liveUrl: '#hero'
+  },
+  {
     id: 'jarvis-core',
     title: 'JARVIS // Personal AI Assistant',
     tagline: 'Autonomous Multimodal Intelligence & Executive Terminal',
@@ -60,26 +80,5 @@ export const projectsData: Project[] = [
     ],
     githubUrl: 'https://github.com/akshaya-core/wifi-attendance',
     liveUrl: 'https://wifi-attendance.example.com'
-  },
-  {
-    id: 'holopulse-telemetry',
-    title: 'HoloPulse // Spatial Telemetry',
-    tagline: 'Dimensional Data Visualization & Shader Laboratory',
-    summary: 'Interactive 3D particle accelerator and telemetry visualizer built for real-time monitoring of distributed nodes and neural weights.',
-    status: 'Experimental',
-    category: 'Creative Tech & 3D',
-    telemetryId: 'LAB_GL_301',
-    techStack: ['Three.js', 'WebGL', 'GLSL Shaders', 'React', 'Framer Motion'],
-    problem: 'Complex multi-dimensional metrics are flatly displayed in dense tabular dashboards, obscuring emergent topology and anomaly clusters.',
-    solution: 'Constructed custom GPU vertex shader particle systems rendering thousands of animated nodes with interactive camera orbit and dimensional depth cueing.',
-    highlights: [
-      'Custom GLSL vertex shader simulating organic gravitational clustering',
-      'Adaptive level-of-detail (LOD) dropping compute overhead on mobile devices',
-      'Harmonized blush pink and lavender spectral palette with ambient bloom',
-      'Strict 60 FPS performance envelope across contemporary GPUs'
-    ],
-    githubUrl: 'https://github.com/akshaya-core/holopulse-telemetry',
-    liveUrl: '#hero'
   }
 ];
-
